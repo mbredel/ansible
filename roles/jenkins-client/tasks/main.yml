@@ -1,0 +1,46 @@
+---
+
+#
+# Check preconditions 
+#
+
+- name: Precondition - check Linux distribution
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
+  fail: msg="ERROR - Not operating on Ubuntu/Debian."
+
+#
+# Create the Jenkins user
+#
+- name: Create the Jenkins user
+  user: name=jenkins comment="Jenkins slave user" shell=/bin/bash home={{ jenkins_home }} 
+
+- name: Get file status of pub key
+  stat: path=/tmp/id_rsa_jenkins_server.pub
+  register: st
+
+- name: Add authorized key
+  authorized_key: user=jenkins key="{{ lookup('file', '/tmp/id_rsa_jenkins_server.pub') }}"
+  when: st.exists is defined
+
+- name: Allow the Jenkins for sudo access
+  lineinfile: line="jenkins ALL=(ALL) NOPASSWD:ALL" dest=/etc/sudoers.d/jenkins owner=root group=root mode=0644 create=yes
+
+#
+# Install Software
+#
+
+- name: Install Maven
+  apt: name=maven state=installed
+
+- name: Install Subversion
+  apt: name=subversion state=installed
+
+#
+# Install the Jenkins Swarm client
+#
+
+- name: Create Jenkins slave directory
+  file: path={{ jenkins_home }}/jenkins-slave state=directory owner=jenkins
+
+- name: Download Jenkins Swarm Client
+  get_url: url={{ swarm_url }}/{{ swarm_client }} dest={{ jenkins_home }}/jenkins-slave/{{ swarm_client }} owner=jenkins

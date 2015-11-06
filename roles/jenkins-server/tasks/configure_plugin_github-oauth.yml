@@ -1,0 +1,21 @@
+---
+
+#
+# Configure github-oauth plugin
+#
+
+- name: Configure github_oauth plugin
+  when: github_oauth is defined
+  template: src={{ item.src }} dest={{item.dest }} owner=jenkins group=jenkins mode=0644
+  with_items:
+    - { src: 'jenkins.model.DownloadSettings.xml.j2', dest: '{{ jenkins_lib }}/jenkins.model.DownloadSettings.xml' }
+    - { src: 'jenkins.security.QueueItemAuthenticatorConfiguration.xml.j2', dest: '{{ jenkins_lib }}/jenkins.security.QueueItemAuthenticatorConfiguration.xml' }
+    - { src: 'config.xml.j2', dest: '{{ jenkins_lib }}/config.xml' }
+
+- name: Restart Jenkins
+  when: github_oauth is defined
+  service: name=jenkins state=restarted sleep=2 enabled=yes
+
+- name: "{{ startup_delay_s | default(10) }}s delay while starting Jenkins"
+  when: github_oauth is defined
+  wait_for: host=localhost port={{ jenkins.port }} delay={{ startup_delay_s | default(10) }}

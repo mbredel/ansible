@@ -1,0 +1,5 @@
+- name: Restart Jenkins
+  service: name=jenkins state=restarted sleep=2 enabled=yes
+
+- name: Wait after restart
+  wait_for: host=localhost port={{ jenkins.port }} delay={{ startup_delay_s | default(10) }}

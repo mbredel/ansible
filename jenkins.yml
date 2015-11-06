@@ -1,0 +1,15 @@
+---
+
+#
+# Playbook to install Jenkins server and swarm clients
+#
+
+- hosts: jenkins-server
+  roles:
+    - jdk8
+    - jenkins-server
+
+- hosts: jenkins-client
+  roles:
+    - jdk8
+    - jenkins-client

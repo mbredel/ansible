@@ -1,0 +1,8 @@
+---
+
+jenkins_home: "/home/jenkins"
+jenkins_server: "192.168.100.103"
+
+swarm_version: 2.0
+swarm_url: "http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/{{ swarm_version }}"
+swarm_client: "swarm-client-{{ swarm_version }}-jar-with-dependencies.jar"

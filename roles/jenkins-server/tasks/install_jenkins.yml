@@ -1,0 +1,33 @@
+---
+
+#
+# Install Jenkins
+#
+
+- name: Add Jenkins apt-key
+  apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key state=present
+
+- name: Add Jenkins repository
+  apt_repository: repo="deb http://pkg.jenkins-ci.org/debian binary/" state=present update_cache=yes
+
+- name: Install dependencies
+  with_items: jenkins.deb.dependencies
+  apt: name={{ item }} state=installed
+
+- name: Install Jenkins
+  apt: name=jenkins state=latest
+  register: jenkins_install
+
+- name: Restart Jenkins
+  when: jenkins_install.changed
+  service: name=jenkins state=restarted sleep=2 enabled=yes
+
+- name: "{{ startup_delay_s | default(10) }}s delay while starting Jenkins"
+  when: jenkins_install.changed
+  wait_for: host=localhost port={{ jenkins.port }} delay={{ startup_delay_s | default(10) }}
+
+- name: Create an SSH key for the Jenkins user
+  user: name=jenkins generate_ssh_key=yes
+
+- name: Copy SSH pub-key to controll machine
+  fetch: src={{ jenkins_lib }}/.ssh/id_rsa.pub dest=/tmp/id_rsa_jenkins_server.pub flat=yes

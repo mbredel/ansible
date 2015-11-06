@@ -1,0 +1,25 @@
+---
+
+#
+# Configure Jenkins
+#
+
+- name: Configure Jenkins port
+  lineinfile: dest=/etc/default/jenkins regexp=^HTTP_PORT= line=HTTP_PORT={{ jenkins.port }}
+  register: jenkins_config 
+
+- name: Configure Jenkins email
+  when: email is defined
+  template: src=hudson.tasks.Mailer.xml.j2 dest={{ jenkins_lib }}/hudson.tasks.Mailer.xml owner=jenkins group=jenkins mode=0644
+
+- name: Configure Jenkins prefix
+  when: prefix is defined
+  lineinfile: dest=/etc/default/jenkins regexp=^PREFIX= line=PREFIX={{ prefix }}
+
+- name: Restart Jenkins
+  when: jenkins_config.changed
+  service: name=jenkins state=restarted sleep=2 enabled=yes
+
+- name: "{{ startup_delay_s | default(10) }}s delay while starting Jenkins"
+  when: jenkins_config.changed
+  wait_for: host=localhost port={{ jenkins.port }} delay={{ startup_delay_s | default(10) }}

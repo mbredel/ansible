@@ -1,0 +1,29 @@
+---
+
+#
+# Check preconditions 
+#
+
+- name: Precondition - check Linux distribution
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
+  fail: msg="ERROR - Not operating on Ubuntu/Debian."
+
+#
+# Install and configure Jenkins
+#
+
+- include: install_jenkins.yml
+
+- include: configure_jenkins.yml
+
+- include: install_plugins.yml
+
+- include: configure_plugin_github-oauth.yml 
+ 
+#
+# Finally, restart Jenkins
+# 
+
+- name: Restart Jenkins
+  service: name=jenkins state=restarted sleep=2 enabled=yes
+

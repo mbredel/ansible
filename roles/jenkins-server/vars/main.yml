@@ -1,0 +1,30 @@
+---
+jenkins_dest: /opt/jenkins
+jenkins_lib: /var/lib/jenkins
+jenkins:
+  deb:
+    dependencies:
+      - 'git'
+      - 'curl'
+  cli_dest: '{{ jenkins_dest }}/jenkins-cli.jar'
+  updates_dest: '{{ jenkins_dest }}/updates_jenkins.json'
+  port: 8080
+
+plugins:
+  - 'github-oauth'
+  - 'github'
+  - 'swarm'
+
+github_oauth:
+  web_uri: 'https://github.com'
+  api_uri: 'https://api.github.com'
+  client_id: 1234
+  client_secret: 'secret'
+  oauth_scopes: 'read:org,user:email'
+
+#prefix: '/build'
+
+#email:
+#  smtp_host: 'mail.example.com'
+#  smtp_ssl: 'true'
+#  default_email_suffix: '@example.com'
