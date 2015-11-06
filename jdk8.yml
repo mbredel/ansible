@@ -1,0 +1,9 @@
+---
+
+#
+# Playbook to install Oracle Java 8 SDK
+#
+
+- hosts: jenkins-server
+  roles:
+    - jdk8
