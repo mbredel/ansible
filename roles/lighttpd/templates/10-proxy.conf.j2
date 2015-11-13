@@ -1,0 +1,21 @@
+# /usr/share/doc/lighttpd/proxy.txt
+
+server.modules   += ( "mod_proxy" )
+
+#$SERVER["socket"] == "0.0.0.0:80" {
+  proxy.balance = "hash"
+  proxy.server  = (
+    "" => (( "host" => "127.0.0.1",
+             "port" => 8080 ))
+  )
+#}
+
+#$SERVER["socket"] == "0.0.0.0:443" {
+#  proxy.balance = "hash"
+#  ssl.engine  = "enable"
+#  ssl.pemfile = "/etc/lighttpd/server.pem"
+#  proxy.server  = (
+#    "" => (( "host" => "127.0.0.1",
+#             "port" => 8080 ))
+#  )
+#}

@@ -1,0 +1,10 @@
+---
+
+#
+# Playbook to install Jenkins server and swarm clients
+#
+
+- hosts: jenkins-server
+  roles:
+    - lighttpd
+

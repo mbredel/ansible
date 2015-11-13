@@ -1,0 +1,19 @@
+---
+
+#
+# Check preconditions 
+#
+
+- name: Precondition - check Linux distribution
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
+  fail: msg="ERROR - Not operating on Ubuntu/Debian."
+
+- name: Install Lighttpd
+  apt: name=lighttpd state=latest
+  register: lighttpd_install
+
+- name: Enable proxy configuration
+  template: src='10-proxy.conf.j2' dest='/etc/lighttpd/conf-enabled/10-proxy.conf' owner=root group=root mode=0644
+
+- name: Restart Lighttpd
+  service: name=lighttpd state=restarted sleep=2 enabled=yes

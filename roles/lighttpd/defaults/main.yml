@@ -1,0 +1,2 @@
+# lighttpd settings
+lgf_vhosts_dir: "/etc/lighttpd/vhosts.d"
