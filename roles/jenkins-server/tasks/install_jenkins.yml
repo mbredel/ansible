@@ -5,7 +5,7 @@
 #
 
 - name: Add Jenkins apt-key
-  apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key state=present
+  apt_key: url=https://jenkins-ci.org/debian/jenkins-ci.org.key state=present validate_certs=false
 
 - name: Add Jenkins repository
   apt_repository: repo="deb http://pkg.jenkins-ci.org/debian binary/" state=present update_cache=yes
