@@ -11,9 +11,15 @@ jenkins:
   port: 8080
 
 plugins:
+  - 'swarm'
   - 'github-oauth'
   - 'github'
-  - 'swarm'
+  - 'ghprb'
+  - 'analysis-core'
+  - 'checkstyle'
+#  - 'junit'
+#  - 'postbuildscript'
+#  - 'groovy-postbuild'
 
 github_oauth:
   web_uri: 'https://github.com'
