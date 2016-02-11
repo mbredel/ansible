@@ -1,0 +1,10 @@
+---
+# Play:   any-role.yml
+# Usage:  ansible-playbook -i ./ansible.hosts ./any-role.yml -e "ROLE=<role>" -e "TARGETIP=<n.n.n.n|host@fqdn>"
+
+- hosts:  '{{ TARGETIP }}'
+  user:    ansible
+  sudo:    true
+
+  roles:
+  - { role: '{{ ROLE }}' }
