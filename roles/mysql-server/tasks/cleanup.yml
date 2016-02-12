@@ -1,0 +1,3 @@
+- name: Ensure MySQL Python libraries are removed.
+  apt: "name=python-mysqldb state=absent"
+  when: python_mysqldb_install_packages | bool

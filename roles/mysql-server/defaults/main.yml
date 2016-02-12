@@ -1,0 +1,23 @@
+---
+
+# Some basic stuff.
+mysql_root_username: root
+mysql_root_password: password
+
+# Update the root password when running the role again.
+mysql_root_password_update: no
+
+# Databases.
+mysql_databases: []
+#   - name: example
+#     collation: utf8_general_ci
+#     encoding: utf8
+#     replicate: 1
+
+# Users.
+mysql_users: []
+#   - name: example
+#     host: 127.0.0.1
+#     password: secret
+#     priv: *.*:USAGE
+

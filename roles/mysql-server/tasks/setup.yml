@@ -1,0 +1,31 @@
+---
+- name: Check if MySQL is already installed.
+  stat: path=/etc/init.d/mysql
+  register: mysql_installed
+
+- name: Update apt cache if MySQL is not yet installed.
+  apt: update_cache=yes
+  when: mysql_installed.stat.exists == false
+
+#
+# Install the MySQL packags, such as mysql-common, mysql-client, and mysqls server.
+#
+- name: Ensure MySQL packages are installed.
+  apt: "name={{ item }} state=installed"
+  with_items: mysql_packages
+  register: deb_mysql_install_packages
+
+- name: Check if MySQL packages were installed.
+  set_fact:
+    mysql_install_packages: "{{ deb_mysql_install_packages is defined and deb_mysql_install_packages.changed }}"
+
+#
+# Install the MySQL Python libraries (temporarily) needed to secure the installation.
+#
+- name: Ensure MySQL Python libraries are installed.
+  apt: "name=python-mysqldb state=installed"
+  register: deb_python_mysqldb_install_packages
+
+- name: Check if MySQL Python libraries were installed.
+  set_fact:
+    python_mysqldb_install_packages: "{{ deb_python_mysqldb_install_packages is defined and deb_python_mysqldb_install_packages.changed }}"
