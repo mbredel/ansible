@@ -1,0 +1,21 @@
+---
+
+#
+# Check preconditions, i.e. its a Debian or Ubuntu distribution.
+#
+- name: Precondition - check Linux distribution
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
+  fail: msg="ERROR - Not operating on Ubuntu/Debian."
+
+- name: Include variables
+  include_vars: "main.yml"
+
+- include: setup.yml
+
+- include_vars: apache-22.yml
+  when: "apache_version.split('.')[1] == '2'"
+
+- include_vars: apache-24.yml
+  when: "apache_version.split('.')[1] == '4'"
+
+- include: configure.yml

@@ -1,0 +1,27 @@
+---
+- name: Check if Apache2 is already installed.
+  stat: path=/etc/init.d/apache2
+  register: apache2_installed
+
+- name: Update apt cache if Apache2 is not yet installed.
+  apt: update_cache=yes
+  when: apache2_installed.stat.exists == false
+
+- name: Ensure Apache is installed.
+  apt: "name={{ item }} state=installed"
+  with_items: apache_packages
+  register: deb_apache2_install_pacakges
+
+- name: Check if Apache2 packages were installed.
+  set_fact:
+    apache2_install_packages: "{{ deb_apache2_install_packages is defined and deb_apache2_install_packages.changed }}"
+
+- name: Get installed version of Apache.
+  shell: "{{ apache_daemon_path }}{{ apache_daemon }} -v"
+  changed_when: false
+  always_run: yes
+  register: _apache_version
+
+- name: Create apache_version variable.
+  set_fact:
+    apache_version: "{{ _apache_version.stdout.split()[2].split('/')[1] }}"
