@@ -1,0 +1,31 @@
+---
+
+#
+# Install original Docker
+#
+
+- name: Precondition - check Linux distribution
+  fail: msg="ERROR - Not operating on Ubuntu/Debian."
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu' 
+
+#- name: Precondition - check Kernel version
+#  fail: msg="ERROR - Kernel version must be greater then 3.13."
+#  when: 
+
+- name: Add PPA repository for Docker 
+  apt_repository: repo="deb https://apt.dockerproject.org/repo ubuntu-{{ ansible_distribution_release }} main"
+
+- name: Add PPA repository key - hack, due to missing hkp support in apt_key module
+  shell: apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys {{ recv_keys }} 
+
+- name: Remove old Docker (if exsist)
+  apt: name=lxc-docker state=absent purge=yes
+
+- name: Update APT
+  apt: update_cache=yes
+
+- name: Install Docker 
+  apt: name=docker-engine state=present
+
+- name: Install Docker compose
+  apt: name=docker-compose state=present

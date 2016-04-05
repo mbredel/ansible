@@ -1,0 +1,9 @@
+---
+
+#
+# Playbook to install Oracle Java 8 SDK
+#
+
+- hosts: docker 
+  roles:
+    - docker
