@@ -1,0 +1,8 @@
+*.tmp
+*.bak
+*.swp
+*.sic
+*.*~
+*.retry
+id_rsa
+id_dsa
