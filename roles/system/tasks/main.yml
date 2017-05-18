@@ -13,17 +13,13 @@
 # Include the variables, just in case.
 #
 - name: Include general variables
-  include_vars: 
-    file: 'main.yml'
-    name: 'general'
+  include_vars: 'main.yml'
 
 #
 # Include the Ubuntu (general) variables.
 #
 - name: Include the Ubuntu (general) variables
-  include_vars:
-    file: 'ubuntu.yml'
-    name: 'ubuntu'
+  include_vars: 'ubuntu.yml'
   when: ansible_distribution == 'Ubuntu'
 
 #
