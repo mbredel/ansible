@@ -8,9 +8,7 @@
 # release.
 #
 - name: Include the software vars for Ubuntu Xenial (16.04 LTS) 
-  include_vars:
-    file: 'software/ubuntu_xenial.yml'
-    name: 'software'
+  include_vars: 'software/ubuntu_xenial.yml'
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
     
 
