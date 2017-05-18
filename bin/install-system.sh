@@ -44,7 +44,7 @@ fi
 # If Ansible ist not installed yet,
 # installed Ansible.
 #
-if ! [ -x "$(command -v git)" ]; then
+if ! [ -x "$(command -v ansible)" ]; then
   echo "Installing Ansible ..."
   ${INSTALL_CMD} ansible
 fi
