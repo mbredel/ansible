@@ -1,0 +1,73 @@
+---
+# Install all the nice software on the system.
+
+#
+# Include the relevant variables from the vars directory
+# based on the Ubuntu version installed. Thus, we can
+# destinguish different software packages by the Ubuntu
+# release.
+#
+- name: Include the software vars for Ubuntu Xenial (16.04 LTS) 
+  include_vars:
+    file: 'software/ubuntu_xenial.yml'
+    name: 'software'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
+    
+
+#
+# Run the equivalent of "apt-get update"
+#
+- name: Update the cache
+  apt:
+    update_cache: yes
+
+#
+# Upgrade the existing packages (but no
+# dist-upgrade).
+#
+- name: Upgrade the system
+  apt:
+    upgrade: yes
+
+#
+# Include the general packages section with all the
+# packages that are useful in general.
+#
+- include: install_software/general.yml
+
+#
+# Include the developers packages with all the
+# packages that I am using for developing software.
+#
+- include: install_software/dev.yml
+
+#
+# Include all the usefull networking tools.
+#
+- include: install_software/net.yml
+
+# Include all the usefull networking tools.
+#
+- include: install_software/net.yml
+
+#
+# Include all the nice Latex software.
+#
+- include: install_software/tex.yml
+
+#
+# Include some more LibreOffice tools.
+#
+- include: install_software/libreoffice.yml
+
+#
+# Install VirtualBox.
+#
+
+#
+# Install IntelliJ.
+#
+
+#
+# Install the touchpad-indicator.
+#

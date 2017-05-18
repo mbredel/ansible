@@ -1,0 +1,9 @@
+---
+# Installs the list of network packages.
+
+- name: Install list of network packages
+  apt:
+    name: {{ item }}
+    state: latest
+  with_items:
+    {{ software.net }}

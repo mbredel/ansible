@@ -1,0 +1,9 @@
+---
+# Installs the list of development packages.
+
+- name: Install list of development packages
+  apt:
+    name: {{ item }}
+    state: latest
+  with_items:
+    {{ software.dev }}

@@ -1,0 +1,9 @@
+---
+# Installs the list of packages related to libre-office.
+
+- name: Install list of libreoffice packages
+  apt:
+    name: {{ item }}
+    state: latest
+  with_items:
+    {{ software.libreoffice }}
