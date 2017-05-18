@@ -44,10 +44,6 @@
 #
 - include: install_software/net.yml
 
-# Include all the usefull networking tools.
-#
-- include: install_software/net.yml
-
 #
 # Include all the nice Latex software.
 #
