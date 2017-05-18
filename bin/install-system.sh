@@ -31,6 +31,10 @@ PLAYBOOK="${ANSIBLE_TMP_DIR}/any-role.yml"
 INSTALL_CMD="apt-get -q -y install"
 GIT_CMD="git"
 
+INSTALLED_GIT=false
+INSTALLED_ANSIBLE=false
+INSTALLED_SSHPASS=false
+
 #
 # If Git is not installed yet, install
 # a Git client.
@@ -38,6 +42,7 @@ GIT_CMD="git"
 if ! [ -x "$(command -v git)" ]; then
   echo "Installing Git ..."
   ${INSTALL_CMD} git
+  INSTALLED_GIT=true
 fi
 
 #
@@ -47,7 +52,19 @@ fi
 if ! [ -x "$(command -v ansible)" ]; then
   echo "Installing Ansible ..."
   ${INSTALL_CMD} ansible
+  INSTALLED_ANSIBLE=true
 fi
+
+#
+# If sshpass ist not installed yet,
+# installed sshpass.
+#
+if ! [ -x "$(command -v sshpass)" ]; then
+  echo "Installing SSHpass ..."
+  ${INSTALL_CMD} sshpass
+  INSTALLED_SSHPASS=true
+fi
+
 
 #
 # Download the Ansible playbooks
