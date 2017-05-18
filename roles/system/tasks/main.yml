@@ -12,10 +12,10 @@
 #
 # Include the variables, just in case.
 #
-- name: Include variables
+- name: Include general variables
   include_vars: 
     file: 'main.yml'
-  name: 'general'
+    name: 'general'
 
 #
 # Include the Ubuntu (general) variables.
