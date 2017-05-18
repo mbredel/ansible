@@ -3,7 +3,7 @@
 
 - name: Install list of latex packages
   apt:
-    name: {{ item }}
+    name: "{{ item }}"
     state: latest
   with_items:
-    {{ software.tex }}
+    "{{ software.tex }}"

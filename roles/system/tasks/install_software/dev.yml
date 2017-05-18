@@ -3,7 +3,7 @@
 
 - name: Install list of development packages
   apt:
-    name: {{ item }}
+    name: "{{ item }}"
     state: latest
   with_items:
-    {{ software.dev }}
+    "{{ software.dev }}"

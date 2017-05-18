@@ -3,7 +3,7 @@
 
 - name: Install list of libreoffice packages
   apt:
-    name: {{ item }}
+    name: "{{ item }}"
     state: latest
   with_items:
-    {{ software.libreoffice }}
+    "{{ software.libreoffice }}"
