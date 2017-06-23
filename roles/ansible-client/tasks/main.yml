@@ -23,7 +23,7 @@
 # Run a local action to get the current user's username.
 #
 - name: Get the username running the deploy
-  sudo: false
+  become: no
   local_action: command whoami
   register: username_on_the_host
 
