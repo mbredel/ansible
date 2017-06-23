@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Michael Bredel
+  description: >
+    An Ansible role that installs my Ubuntu systems, like
+    my laptop from scratch. Thus, it installs all the
+    software and packages I am using as well as
+    configurations, like my Wifi connections, printers,
+    and other stuff I collected over the years. 
+  license: license (GPLv2)
+  min_ansible_version: 1.2
+platforms:
+- name: Ubuntu
+versions:
+- xenial

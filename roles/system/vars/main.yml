@@ -1,0 +1,102 @@
+---
+# vars file for system
+
+software:
+  general:
+    - chromium-browser
+    - curl
+    - cpuid
+    - dconf-tools
+    - docker.io
+    - dkms
+    - flashplugin-downloader
+    - geoip-database-extra
+    - gimp
+    - gimp-data-extras
+    - gimp-help-en
+    - gnome-extra-icons
+    - gnome-icon-theme
+    - gnuplot
+    - gnuplot-data
+    - gnuplot-x11
+    - gparted
+    - gscan2pdf
+    - htop
+    - inkscape
+    - keepass2
+    - meld
+    - network-manager-openvpn
+    - ndiff
+    - ntpdate
+    - openvpn
+    - p7zip-rar
+    - revelation
+    - screen
+    - scribus
+    - smbclient
+    - synaptic
+    - terminator
+    - tesseract-ocr-deu
+    - ubuntu-restricted-addons
+    - ubuntu-restricted-extras
+    - unity-tweak-tool
+    - unrar
+    - vim
+    - xsane
+  dev:
+    - default-jdk
+    - git
+    - maven
+    - npm
+    - octave
+    - octave-io
+    - octave-statistics
+    - subversion
+    - jshon
+    - ansible
+  net:
+    - nmap
+    - traceroute
+    - wireshark
+  tex:
+    - texinfo
+    - texlive
+    - texlive-bibtex-extra
+    - texlive-fonts-extra
+    - texlive-lang-english
+    - texlive-lang-german
+    - texlive-latex-extra
+    - texlive-latex-extra-doc
+    - texlive-luatex
+    - texlive-math-extra
+    - texlive-publishers
+    - texlive-publishers-doc
+    - texlive-science
+    - texlive-science-doc
+    - texstudio
+    - transfig
+    - chktex
+  libreoffice:
+    - libreoffice-avmedia-backend-gstreamer
+    - libreoffice-base-core
+    - libreoffice-calc
+    - libreoffice-common
+    - libreoffice-core
+    - libreoffice-draw
+    - libreoffice-gnome
+    - libreoffice-gtk
+    - libreoffice-help-de
+    - libreoffice-help-en-us
+    - libreoffice-impress
+    - libreoffice-java-common
+    - libreoffice-l10n-de
+    - libreoffice-l10n-en-gb
+    - libreoffice-math
+    - libreoffice-ogltrans
+    - libreoffice-pdfimport
+    - libreoffice-style-breeze
+    - libreoffice-style-galaxy
+    - libreoffice-writer
+    - python3-uno
+    - uno-libs3
+    - ure

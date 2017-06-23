@@ -1,0 +1,9 @@
+---
+# Installs the list of general packages.
+
+- name: Install list of general packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    "{{ software.general }}"

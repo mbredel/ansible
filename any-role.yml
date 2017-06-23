@@ -1,4 +1,11 @@
 ---
+#
+# The 'any-role' Ansible playbook allows to execute any of the
+# Ansible roles defined in this directory. To this end, a 
+# user has to add the target IP to an inventory file, specify 
+# the role, and the target IP.
+#
+
 # Play:   any-role.yml
 # Usage:  ansible-playbook -i ./ansible.hosts ./any-role.yml -e "ROLE=<role>" -e "TARGETIP=<n.n.n.n|host@fqdn>"
 

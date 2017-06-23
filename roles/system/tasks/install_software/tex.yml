@@ -1,0 +1,9 @@
+---
+# Installs the list of packages related to Latex.
+
+- name: Install list of latex packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    "{{ software.tex }}"

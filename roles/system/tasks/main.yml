@@ -1,0 +1,33 @@
+---
+# Tasks file for system
+
+#
+# Check preconditions, i.e. its a Debian or Ubuntu distribution.
+# Right now, we only support Ubuntu distributions.
+#
+- name: Precondition - check Linux distribution
+  when: ansible_distribution != 'Debian' and ansible_distribution != 'Ubuntu'
+  fail: msg="ERROR - Not operating on Ubuntu/Debian."
+
+#
+# Include the variables, just in case.
+#
+- name: Include general variables
+  include_vars: 'main.yml'
+
+#
+# Include the Ubuntu (general) variables.
+#
+- name: Include the Ubuntu (general) variables
+  include_vars: 'ubuntu.yml'
+  when: ansible_distribution == 'Ubuntu'
+
+#
+# Install all the nice software on the system.
+#
+- include: install_software.yml
+
+#
+# Configure the system.
+#
+- include: configuration.yml
