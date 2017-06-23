@@ -16,4 +16,4 @@ fi
 #
 # Execute the command.
 #
-ansible-playbook -i ${INVENTORY_FILE} ${PLAYBOOK} -e "ROLE=${ROLE}" -e "TARGETIP=$1"
+ansible-playbook --become --ask-become-pass --ask-pass -i $1, ${PLAYBOOK} -e "ROLE=${ROLE}" -e "TARGETIP=$1"
